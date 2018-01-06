@@ -1,13 +1,18 @@
 package exercise1;
 
-class Item {
+import java.io.Serializable;
+
+class Item implements Serializable {
     private static final int MEDIUM_SIZE = 10;
     private static final int SMALL_SIZE = 5;
     private static final int LARGE_SIZE = 20;
+
     private static final double SMALL_DISCOUNT = 0.05;
     private static final double MEDIUM_DISCOUNT = 0.1;
     private static final double LARGE_DISCOUNT = 0.15;
     private static final int NO_DISCOUNT = 0;
+
+    private static final long serialVersionUID = 8700960712205571882L;
 
     private String itemName;
     private int quantity;

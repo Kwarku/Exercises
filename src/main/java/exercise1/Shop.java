@@ -11,27 +11,35 @@ public class Shop {
 
 
         System.out.println("first list. Only bread and sugar");
-        order.show();
+        order.showOrder();
 
 
         System.out.println("\nremove bread, only sugar in list");
         order.removeItem(0);
-        order.show();
+        order.showOrder();
 
 
         System.out.print("\nagain add bread");
         order.addItem(item);
-        order.show();
+        order.showOrder();
 
 
         System.out.print("\nAgain add bread, now quantity growing");
         order.addItem(item);
-        order.show();
+        order.showOrder();
 
         System.out.print("\nAdd a lot of breads.");
         Item item2 = new Item("Bread", 1, 2.5);
         item2.setQuantity(15);
         order.addItem(item2);
-        order.show();
+        order.addItem(item2);
+
+        order.showOrder();
+
+        String fileName = "file.ser";
+        Order.saveOrderToFile(order, fileName);
+
+
+
     }
 }
