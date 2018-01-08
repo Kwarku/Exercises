@@ -1,6 +1,9 @@
 package exercise1;
 
 public class Shop {
+
+    static final String EXERCISE1_FILE = "Exercise1File.ser";
+
     public static void main(String[] args) {
         Item item = new Item("Bread", 2, 2.5);
         Item item1 = new Item("Sugar", 3, 3.25);
@@ -36,8 +39,7 @@ public class Shop {
 
         order.showOrder();
 
-        String fileName = "file.ser";
-        Order.saveOrderToFile(order, fileName);
+        Order.saveOrderToFile(order, EXERCISE1_FILE);
 
 
 
