@@ -1,5 +1,9 @@
 package exercise2;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 class List {
     private final int size;
     private int[] array;
@@ -45,15 +49,17 @@ class List {
 
     void deleteFirst(int numberToDelete) {
         temp = findNumber(numberToDelete);
-        int copyFromElement;
-        volume--;
+        if (temp == Integer.MIN_VALUE) {
+            return;
+        }
 
         //copy array and delete one element
-
+        int copyFromElement;
         for (int i = temp; i < array.length - 1; i++) {
             copyFromElement = array[i + 1];
             array[i] = copyFromElement;
         }
+        volume--;
     }
 
 
@@ -66,6 +72,54 @@ class List {
         return Integer.MIN_VALUE;
     }
 
+
+    void deleteRepeatsNumbers() {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i + 1; j < array.length - 1; j++) {
+                if (array[i] == array[j]) {
+                    array[j] = Integer.MAX_VALUE;
+                }
+            }
+        }
+        for (int num : array) {
+            deleteFirst(Integer.MAX_VALUE);
+
+        }
+    }
+
+    void inverseArray() {
+        int[] invertArray = new int[size];
+
+        //inverse array
+        for (int i = 0; i < array.length; i++) {
+            invertArray[size - 1 - i] = array[i];
+        }
+
+        //copy inverted array to original.
+        for (int i = 0; i < array.length; i++) {
+            array[i] = invertArray[i];
+        }
+    }
+
+
+    void saveAsFile(String fileName) {
+        try
+                (FileWriter fileWriter = new FileWriter(fileName);
+                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            for (int element : array) {
+                if (element != 0) {
+                    bufferedWriter.newLine();
+                    bufferedWriter.write(String.valueOf(element));
+                }
+
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     void showInfo() {
         System.out.println("\nList of numbers:");
