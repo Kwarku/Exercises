@@ -16,5 +16,7 @@ public class Main {
         System.out.println("t1 * 4 = " + t1.multiply(4));
 
 
+        Time[] tab = {t1, t2, t2};
+        System.out.println(Time.addingUp(tab, 2));
     }
 }

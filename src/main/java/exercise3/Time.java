@@ -13,6 +13,18 @@ class Time {
         setMinutes(minutes);
     }
 
+    static Time addingUp(Time[] array, int n) {
+        Time tempTime = new Time(0);
+
+        for (int i = 0; i < array.length; i++) {
+            if (i < n) {
+                tempTime.setHour(tempTime.getHour() + array[i].getHour());
+                tempTime.setMinutes(tempTime.getMinutes() + array[i].getMinutes());
+            } else return tempTime;
+
+        }
+        return tempTime;
+    }
 
     Time addition(Time time) {
         Time tempTime = new Time(time.getHour(), time.getMinutes());
