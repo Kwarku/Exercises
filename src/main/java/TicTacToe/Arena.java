@@ -1,9 +1,10 @@
 package TicTacToe;
 
 class Arena {
-    private final int SIZE_OF_AREA = 3;
-    private final char EMPTY_SIGN = ' ';
-    boolean isWin = false;
+    private static final int SIZE_OF_AREA = 3;
+    private static final int MAX_SIZE_OF_AREA = 9;
+    private static final char EMPTY_SIGN = ' ';
+    public boolean isWin = false;
     private int moves = 0;
     private char[][] arena;
 
@@ -25,8 +26,8 @@ class Arena {
     }
 
 
-    void move(int x, int y, char sign) {
-        if (moves <= 9 && !isWin) {
+    public void move(int x, int y, char sign) {
+        if (moves <= MAX_SIZE_OF_AREA && !checkIsGameWin(sign)) {
             if (arena[x][y] == EMPTY_SIGN) {
                 arena[x][y] = sign;
                 moves++;
@@ -35,9 +36,8 @@ class Arena {
             }
 
             printArena();
-            checkIsWin(sign);
 
-            if (isWin) {
+            if (checkIsGameWin(sign)) {
                 System.out.println("Player " + sign + " Win this game");
             }
 
@@ -47,22 +47,53 @@ class Arena {
 
     }
 
-    private void checkIsWin(char sign) {
-        if (arena[0][0] == sign && arena[0][1] == sign && arena[0][2] == sign) {
+
+    private boolean checkIsGameWin(char sign) {
+        if (checkIsColumnWin(sign)) {
             isWin = true;
-        } else if (arena[1][0] == sign && arena[1][1] == sign && arena[1][2] == sign) {
+            return true;
+        } else if (checkIsRowWin(sign)) {
             isWin = true;
-        } else if (arena[2][0] == sign && arena[2][1] == sign && arena[2][2] == sign) {
+            return true;
+        } else if (checkIsDiagonalWin(sign)) {
             isWin = true;
-        } else if (arena[0][0] == sign && arena[1][0] == sign && arena[2][0] == sign) {
-            isWin = true;
-        } else if (arena[0][1] == sign && arena[1][1] == sign && arena[2][1] == sign) {
-            isWin = true;
-        } else if (arena[0][2] == sign && arena[1][2] == sign && arena[2][2] == sign) {
-            isWin = true;
-        } else if (arena[0][0] == sign && arena[1][1] == sign && arena[2][2] == sign) {
-            isWin = true;
+            return true;
+        } else return false;
+    }
+
+    private boolean checkIsRowWin(char sign) {
+
+        for (int i = 0; i < arena.length; i++) {
+            if (arena[i][0] == sign &&
+                    arena[i][1] == sign &&
+                    arena[i][2] == sign &&
+                    arena[i][i] != EMPTY_SIGN) {
+                return true;
+            }
         }
+
+        return false;
+    }
+
+    private boolean checkIsColumnWin(char sign) {
+
+        for (int i = 0; i < arena.length; i++) {
+            if (arena[0][i] == sign &&
+                    arena[1][i] == sign &&
+                    arena[2][i] == sign &&
+                    arena[i][i] != EMPTY_SIGN) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean checkIsDiagonalWin(char sign) {
+        if (arena[0][0] == sign && arena[1][1] == sign && arena[2][2] == sign) {
+            return true;
+        } else return false;
+
     }
 
     private void printArena() {
