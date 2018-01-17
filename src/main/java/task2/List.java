@@ -1,10 +1,11 @@
-package exercise2;
+package task2;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class List {
+public class List implements ListInterface {
+    public static final int TYPICAL_ARRAY_SIZE = 10;
     private final int size;
     private int[] array;
     private int volume;
@@ -12,19 +13,20 @@ class List {
     private int temp;
 
 
-    List() {
-        this(10);
+    public List() {
+        this(TYPICAL_ARRAY_SIZE);
 
     }
 
-    List(int size) {
+    public List(int size) {
         this.size = size;
         array = new int[size];
         volume = 0;
     }
 
 
-    void addElement(int element) {
+    @Override
+    public void addElement(int element) {
         if (volume == size) {
             System.out.println("Error: the array is full");
 
@@ -34,7 +36,9 @@ class List {
         }
     }
 
-    void findElement(int searchingElement) {
+
+    @Override
+    public void findElement(int searchingElement) {
         temp = findNumber(searchingElement);
 
         if (array[temp] == searchingElement) {
@@ -46,8 +50,8 @@ class List {
         }
     }
 
-
-    void deleteFirst(int numberToDelete) {
+    @Override
+    public void deleteFirst(int numberToDelete) {
         temp = findNumber(numberToDelete);
         if (temp == Integer.MIN_VALUE) {
             return;
@@ -72,8 +76,8 @@ class List {
         return Integer.MIN_VALUE;
     }
 
-
-    void deleteRepeatsNumbers() {
+    @Override
+    public void deleteRepeatsNumbers() {
         for (int i = 0; i < array.length; i++) {
             for (int j = i + 1; j < array.length - 1; j++) {
                 if (array[i] == array[j]) {
@@ -87,7 +91,8 @@ class List {
         }
     }
 
-    void inverseArray() {
+    @Override
+    public void inverseArray() {
         int[] invertArray = new int[size];
 
         //inverse array
@@ -101,8 +106,8 @@ class List {
         }
     }
 
-
-    void saveAsFile(String fileName) {
+    @Override
+    public void saveAsFile(String fileName) {
         try
                 (FileWriter fileWriter = new FileWriter(fileName);
                  BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
@@ -121,15 +126,18 @@ class List {
 
     }
 
-    void showInfo() {
-        System.out.println("\nList of numbers:");
-        System.out.println("Size: " + size);
-        System.out.println("Volume: " + volume);
-        System.out.print("Elements: ");
+    @Override
+    public String showInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nList of numbers:");
+        sb.append("\nSize: " + size);
+        sb.append("\nVolume: " + volume);
+        sb.append("\nElements: ");
         for (int number : array) {
             if (number != 0)
-                System.out.print(number + " ");
+                sb.append(number + " ");
         }
-        System.out.println("\n");
+        sb.append("\n");
+        return sb.toString();
     }
 }

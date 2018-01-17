@@ -1,4 +1,4 @@
-package exercise2;
+package task2;
 
 public class Main {
 

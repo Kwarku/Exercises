@@ -1,6 +1,7 @@
-package exercise3;
+package task3;
 
 class Time {
+    public static final int MINUTES_ON_HOUR = 60;
     private int hour;
     private int minutes;
 
@@ -13,7 +14,7 @@ class Time {
         setMinutes(minutes);
     }
 
-    static Time addingUp(Time[] array, int n) {
+    public static Time addingUp(Time[] array, int n) {
         Time tempTime = new Time(0);
 
         for (int i = 0; i < array.length; i++) {
@@ -26,7 +27,7 @@ class Time {
         return tempTime;
     }
 
-    Time addition(Time time) {
+    public Time addition(Time time) {
         Time tempTime = new Time(time.getHour(), time.getMinutes());
 
         tempTime.setMinutes(tempTime.getMinutes() + getMinutes());
@@ -36,7 +37,7 @@ class Time {
 
     }
 
-    Time subtraction(Time time) {
+    public Time subtraction(Time time) {
         Time tempTime = new Time(time.getHour(), time.getMinutes());
 
         tempTime.setHour(tempTime.getHour() - getHour());
@@ -45,10 +46,10 @@ class Time {
         return tempTime;
     }
 
-    Time multiply(int multipler) {
+    public Time multiply(int multiplier) {
         Time tempTime = new Time(getHour(), getMinutes());
-        tempTime.setHour(tempTime.getHour() * multipler);
-        tempTime.setMinutes(tempTime.getMinutes() * multipler);
+        tempTime.setHour(tempTime.getHour() * multiplier);
+        tempTime.setMinutes(tempTime.getMinutes() * multiplier);
         return tempTime;
     }
 
@@ -71,13 +72,13 @@ class Time {
 
     void setMinutes(int minutes) {
 
-        if (minutes >= 60) {
-            while (minutes >= 60) {
-                minutes -= 60;
+        if (minutes >= MINUTES_ON_HOUR) {
+            while (minutes >= Time.MINUTES_ON_HOUR) {
+                minutes -= Time.MINUTES_ON_HOUR;
                 setHour(getHour() + 1);
             }
         } else if (minutes < 0) {
-            minutes += 60;
+            minutes += Time.MINUTES_ON_HOUR;
             setHour(getHour() - 1);
         }
 

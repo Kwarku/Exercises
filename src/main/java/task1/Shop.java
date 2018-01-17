@@ -1,4 +1,4 @@
-package exercise1;
+package task1;
 
 public class Shop {
 
@@ -14,22 +14,22 @@ public class Shop {
 
 
         System.out.println("first list. Only bread and sugar");
-        order.showOrder();
+        System.out.println(order.showOrder());
 
 
         System.out.println("\nremove bread, only sugar in list");
         order.removeItem(0);
-        order.showOrder();
+        System.out.println(order.showOrder());
 
 
         System.out.print("\nagain add bread");
         order.addItem(item);
-        order.showOrder();
+        System.out.println(order.showOrder());
 
 
         System.out.print("\nAgain add bread, now quantity growing");
         order.addItem(item);
-        order.showOrder();
+        System.out.println(order.showOrder());
 
         System.out.print("\nAdd a lot of breads.");
         Item item2 = new Item("Bread", 1, 2.5);
@@ -37,7 +37,7 @@ public class Shop {
         order.addItem(item2);
         order.addItem(item2);
 
-        order.showOrder();
+        System.out.println(order.showOrder());
 
         Order.saveOrderToFile(order, EXERCISE1_FILE);
 

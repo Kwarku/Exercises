@@ -1,6 +1,6 @@
-package tasksOnStrings;
+package workingWithStrings;
 
-public class Tasks {
+public class StringOperations {
 
 
     public char giveMeOneLetter(String text, int index) {

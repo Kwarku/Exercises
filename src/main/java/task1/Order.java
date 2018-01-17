@@ -1,4 +1,4 @@
-package exercise1;
+package task1;
 
 import java.io.*;
 
@@ -7,22 +7,22 @@ class Order implements Serializable {
     private static final long serialVersionUID = 3521966382402127876L;
 
     private Item[] listOfItems;
-    private int howManyAdded;
+    private int numberOfAddedItems;
     private int maxSizeOfOrder;
 
 
-    Order() {
+    public Order() {
         this(10);
 
     }
 
-    Order(int maxSizeOfOrder) {
+    public Order(int maxSizeOfOrder) {
         this.maxSizeOfOrder = maxSizeOfOrder;
-        howManyAdded = 0;
+        numberOfAddedItems = 0;
         listOfItems = new Item[maxSizeOfOrder];
     }
 
-    static void saveOrderToFile(Order order, String fileName) {
+    public static void saveOrderToFile(Order order, String fileName) {
         try (ObjectOutputStream oos = new ObjectOutputStream
                 (new FileOutputStream(fileName))) {
             oos.writeObject(order);
@@ -31,7 +31,7 @@ class Order implements Serializable {
         }
     }
 
-    static Order loadOrderFromFile(String fileName) {
+    public static Order loadOrderFromFile(String fileName) {
 
         Order someOrder = null;
         try {
@@ -52,10 +52,10 @@ class Order implements Serializable {
         return someOrder;
     }
 
-    void addItem(Item newItem) {
+    public void addItem(Item newItem) {
         boolean isUnique = true;
-        if (howManyAdded == 0) {
-            addItemIsUnique(newItem);
+        if (numberOfAddedItems == 0) {
+            addUniqueItem(newItem);
         } else {
             for (int i = 0; i < maxSizeOfOrder; i++) {
                 if (listOfItems[i] != null &&
@@ -70,7 +70,7 @@ class Order implements Serializable {
             }
 
             if (isUnique) {
-                addItemIsUnique(newItem);
+                addUniqueItem(newItem);
             }
 
         }
@@ -78,9 +78,9 @@ class Order implements Serializable {
 
     }
 
-    private void addItemIsUnique(Item newItem) {
-        listOfItems[howManyAdded] = newItem;
-        howManyAdded++;
+    private void addUniqueItem(Item newItem) {
+        listOfItems[numberOfAddedItems] = newItem;
+        numberOfAddedItems++;
     }
 
     private double countOrder() {
@@ -88,45 +88,44 @@ class Order implements Serializable {
         for (Item item : listOfItems) {
             if (item != null) {
                 totalPrice += item.calculatePrice();
-
-            } else break;
+            }
         }
         return totalPrice;
     }
 
-    void removeItem(int index) {
+    public void removeItem(int index) {
         listOfItems[index] = null;
         for (int i = index + 1; i < maxSizeOfOrder; i++) {
             Item temp = listOfItems[i];
             listOfItems[i - 1] = temp;
         }
-        howManyAdded--;
+        numberOfAddedItems--;
     }
 
-    void editItem(int index, String newName) {
+    public void editItem(int index, String newName) {
         listOfItems[index].setItemName(newName);
     }
 
-    void editItem(int index, int newQuantity) {
+    public void editItem(int index, int newQuantity) {
         listOfItems[index].setQuantity(newQuantity);
     }
 
-    void editItem(int index, double newPrice) {
+    public void editItem(int index, double newPrice) {
         listOfItems[index].setPrice(newPrice);
     }
 
-    void showOrder() {
-        System.out.println("\nOrder: ");
+    public String showOrder() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\nOrder: \n");
         for (Item item : listOfItems) {
             if (item != null) {
-                item.show();
-                System.out.println();
-
-            } else break;
-
-
+                sb.append(item.toString());
+                sb.append("\n");
+            }
         }
-        System.out.println("Total: " + countOrder() + " zł");
+        sb.append("Total: " + countOrder() + " zł");
 
+        return sb.toString();
     }
 }

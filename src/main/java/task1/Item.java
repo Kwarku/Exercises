@@ -1,8 +1,8 @@
-package exercise1;
+package task1;
 
 import java.io.Serializable;
 
-class Item implements Serializable {
+public class Item implements Serializable {
     private static final int MEDIUM_SIZE = 10;
     private static final int SMALL_SIZE = 5;
     private static final int LARGE_SIZE = 20;
@@ -19,14 +19,14 @@ class Item implements Serializable {
     private double price;
 
 
-    Item(String name, int quantity, double price) {
-        setItemName(name);
-        setQuantity(quantity);
-        setPrice(price);
+    public Item(String name, int quantity, double price) {
+        this.itemName = name;
+        this.quantity = quantity;
+        this.price = price;
 
     }
 
-    double calculatePrice() {
+    public double calculatePrice() {
         return (getQuantity() * getPrice()) * (1 - calcTheValueWithDiscount());
     }
 
@@ -45,28 +45,31 @@ class Item implements Serializable {
         return discount;
     }
 
-    void show() {
-        System.out.printf("%-20s", getItemName());
-        System.out.printf("%-10s", (getPrice() + " PLN"));
-        System.out.printf("%4s", (getQuantity() + " pieces"));
-        System.out.printf("%10s", (calcTheValueWithDiscount() * 100 + "%"));
-        System.out.printf("%10s", (calculatePrice() + "PLN"));
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-20s", getItemName()));
+        sb.append(String.format("%-10s", (getPrice() + " PLN")));
+        sb.append(String.format("%4s", (getQuantity() + " pieces")));
+        sb.append(String.format("%10s", (calcTheValueWithDiscount() * 100 + "%")));
+        sb.append(String.format("%10s", (calculatePrice() + "PLN")));
+        return sb.toString();
     }
 
 
-    String getItemName() {
+    public String getItemName() {
         return itemName;
     }
 
-    void setItemName(String itemName) {
+    public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
-    int getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    void setQuantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -74,7 +77,7 @@ class Item implements Serializable {
         return price;
     }
 
-    void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
