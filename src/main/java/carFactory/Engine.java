@@ -1,7 +1,7 @@
 package carFactory;
 
 public enum Engine {
-    DIESEL("diesel"), GASOLINE("gas"), LPG("lpg"), HYBRIDE("hybrid"), ELECTRIC("electric"), DIFFERENT(" ");
+    DIESEL("diesel"), GASOLINE("gas"), LPG("lpg"), HYBRID("hybrid"), ELECTRIC("electric"), DIFFERENT(" ");
 
     String name;
 
