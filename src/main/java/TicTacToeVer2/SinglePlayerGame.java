@@ -1,6 +1,6 @@
 package TicTacToeVer2;
 
-public class SinglePlayerGame extends TicTacToeArena implements GameInterface {
+public class SinglePlayerGame extends TicTacToeArena implements GameLogic {
 
 
     private Field userPlayer;
@@ -14,12 +14,13 @@ public class SinglePlayerGame extends TicTacToeArena implements GameInterface {
     }
 
     @Override
-    public void move(String position) {
+    public void playerOneMove(String position) {
         tempField = Field.getField(position);
         arena[tempField.posX][tempField.posY] = userPlayer;
         printArena();
 
     }
+
 
     @Override
     public boolean checking() {

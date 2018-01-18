@@ -15,7 +15,7 @@ public class MainTTTGame {
         spg.choosePlayer(scanner.next());
         while (!spg.checking()) {
             System.out.println("choose one of filed number");
-            spg.move(scanner.next());
+            spg.playerOneMove(scanner.next());
         }
 
     }

@@ -1,10 +1,11 @@
 package TicTacToeVer2;
 
-public interface GameInterface {
+public interface GameLogic {
 
     Field choosePlayer(String name);
 
-    void move(String position);
+    void playerOneMove(String position);
+
 
     boolean checking();
 
